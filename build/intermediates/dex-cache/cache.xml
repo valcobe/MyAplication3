@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Montse\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.0\support-annotations-21.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
+        <dex dex="C:\Users\Montse\AndroidStudioProjects\SurtidoIntentImpl\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.0-dbb753bb9b1e5dc08f6b21ab522f2df5832c60b1.jar" />
+    </item>
+    <item
+        jar="C:\Users\Montse\AndroidStudioProjects\SurtidoIntentImpl\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="686344a780033e4ba22b926cd225f8d4941247e6">
+        <dex dex="C:\Users\Montse\AndroidStudioProjects\SurtidoIntentImpl\app\build\intermediates\pre-dexed\debug\classes-3b9a3c024beec8bf2eaf27a260359414a752868a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Montse\AndroidStudioProjects\SurtidoIntentImpl\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\libs\internal_impl-21.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
+        <dex dex="C:\Users\Montse\AndroidStudioProjects\SurtidoIntentImpl\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.0-4e1449990f4630e835007bf0e65addb387fa693b.jar" />
+    </item>
+
+</items>
