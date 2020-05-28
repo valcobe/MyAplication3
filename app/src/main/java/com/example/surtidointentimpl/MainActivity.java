@@ -7,13 +7,10 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,9 +21,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 
 public class MainActivity extends Activity implements OnClickListener{
@@ -47,8 +41,6 @@ public class MainActivity extends Activity implements OnClickListener{
 		Button btn8 = findViewById(R.id.button8);
 		Button btn9 = findViewById(R.id.button9);
 		Button btn10 = findViewById(R.id.button10);
-		Button btn11 = findViewById(R.id.button11);
-
 
 		btn1.setOnClickListener(this);
 		btn2.setOnClickListener(this);
@@ -60,47 +52,11 @@ public class MainActivity extends Activity implements OnClickListener{
 		btn8.setOnClickListener(this);
 		btn9.setOnClickListener(this);
 		btn10.setOnClickListener(this);
-		btn11.setOnClickListener(this);
 
 
 		if (Build.VERSION.SDK_INT >= 23)
 			if (! ckeckPermissions())
 				requestPermissions();
-	}
-
-	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-		if(requestCode == 0) {
-			if (resultCode == RESULT_OK) {
-				ImageView img = findViewById(R.id.imageView);
-				Uri uri = data.getData();
-				try {
-					InputStream str = getContentResolver().openInputStream(uri);
-					Bitmap bit = BitmapFactory.decodeStream(str);
-					img.setImageBitmap(bit);
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-			}
-
-		} else if (requestCode == 1) {
-			if (resultCode == RESULT_OK) {
-				TextView tw = findViewById(R.id.textContact);
-				Uri uri = data.getData();
-				Cursor cu = getContentResolver().query(uri, null, null, null, null);
-				cu.moveToFirst();
-				int nameIndex = cu.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
-				String name = cu.getString(nameIndex);
-				tw.setText(name);
-			}
-		} else if (requestCode == 2) {
-			if (resultCode == RESULT_OK) {
-				TextView tw = findViewById(R.id.textView3);
-				Bundle passedData = data.getExtras();
-				String mess = passedData.getString(getString(R.string.mess));
-				tw.setText(mess);
-
-			}
-		}
 	}
 
 	public void onClick (View v) {
@@ -152,14 +108,10 @@ public class MainActivity extends Activity implements OnClickListener{
 			//Acceder contactos
 			case R.id.button7:
 				Toast.makeText(this, getString(R.string.opcion7), Toast.LENGTH_LONG).show();
-
-				//obligatoria
-				in = new Intent(Intent.ACTION_VIEW, ContactsContract.Contacts.CONTENT_URI);
-				startActivity(in);
-
-				//optatiu
+				//in = new Intent(Intent.ACTION_VIEW, ContactsContract.Contacts.CONTENT_URI);
+				//startActivity(in);
 				in = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-				startActivityForResult(in, 1);
+				startActivityForResult(in, 0);
 				break;
 			//Enviar SMS
 			case R.id.button8:
@@ -181,17 +133,32 @@ public class MainActivity extends Activity implements OnClickListener{
 			//Acceder galeria
 			case R.id.button10:
 				Toast.makeText(this, getString(R.string.opcion10), Toast.LENGTH_LONG).show();
-
-				//obligatoria
-				in = new Intent(Intent.ACTION_VIEW, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-				startActivity(in);
-
-				//optatiu
+				//in = new Intent(Intent.ACTION_VIEW, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				//startActivity(in);
 				in = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-				startActivityForResult(in, 0);
+				startActivityForResult(in, 1);
 				break;
 
 
+		}
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		if (requestCode == 0) {
+			if (resultCode == RESULT_OK) {
+				TextView tw = findViewById(R.id.textContact);
+				Uri uri = data.getData();
+				Cursor cu = getContentResolver().query(uri, null, null, null, null);
+				cu.moveToFirst();
+				int nameIndex = cu.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+				String name = cu.getString(nameIndex);
+				tw.setText(name);
+			}
+		}else if(requestCode == 1) {
+			if (resultCode == RESULT_OK) {
+				ImageView img = findViewById(R.id.imageView);
+				img.setImageURI(data.getData());
+			}
 		}
 	}
 
@@ -213,20 +180,17 @@ public class MainActivity extends Activity implements OnClickListener{
 
 	private boolean ckeckPermissionsCallPhone() {
 		return ActivityCompat.checkSelfPermission(getApplicationContext(),
-				Manifest.permission.CALL_PHONE) ==
-				PackageManager.PERMISSION_GRANTED;
+				Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED;
 	}
 
 	private boolean ckeckPermissionsReadContacts() {
 		return ActivityCompat.checkSelfPermission(getApplicationContext(),
-				Manifest.permission.READ_CONTACTS) ==
-				PackageManager.PERMISSION_GRANTED;
+				Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED;
 	}
 
 	private void requestPermissions() {
 		ActivityCompat.requestPermissions(MainActivity.this,
-				new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE},
-				0);
+				new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE}, 0);
 	}
 
 

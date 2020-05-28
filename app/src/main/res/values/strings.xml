@@ -8,7 +8,7 @@
     <string name="navegando">Acceso a la web</string>
     <string name="contactando">Tlf. de contacto: 973.702.700</string>
     <string name="link">\thttp://www.udl.cat</string>
-    <string name="emailDest">Email destinatario: sss@udl.cat\t</string>
+    <string name="emailDest">Email destinatario: activity@udl.cat\t</string>
     <string name="smsDest">Tlf. destino: 666666666\t</string>
     <string name="smsDest2">6466888777</string>
     <string name="telef">666666666</string>
@@ -49,7 +49,7 @@
     <string name="Boton8">Enviar SMS</string>
     <string name="Boton9">Enviar email</string>
     <string name="Boton10">Acceder Galería imágenes</string>
-    <string name="Boton11">Acceder Camara</string>
+
 
 
 </resources>
