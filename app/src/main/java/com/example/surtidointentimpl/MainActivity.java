@@ -133,7 +133,6 @@ public class MainActivity extends Activity implements OnClickListener{
 			//Buscar Google
 			case R.id.button4:
 				Toast.makeText(this, getString(R.string.opcion4), Toast.LENGTH_LONG).show();
-				//in = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com/search?q=" + "escola politecnica superior UdL"));
 				in = new Intent(Intent.ACTION_WEB_SEARCH);
 				in.putExtra(SearchManager.QUERY, textoABuscar);
 				startActivity(in);
@@ -192,12 +191,7 @@ public class MainActivity extends Activity implements OnClickListener{
 				startActivityForResult(in, 0);
 				break;
 
-			//Acceder a ThirdActivity optativa
-			case R.id.button11:
-				Toast.makeText(this, R.string.third, Toast.LENGTH_LONG).show();
-				in = new Intent(Intent.ACTION_PICK);
-				startActivityForResult(in, 2);
-				break;
+
 		}
 	}
 
